@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Samarpan - Navratan Foundations</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --primary-yellow: #f1c40f;
+        --dark-bg: #1a1a1a;
+        --light-blue: #e3f2fd;
+        --text-dark: #333;
+        --text-gray: #666;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        line-height: 1.6;
+        color: var(--text-dark);
+        background: #fff;
+      }
+
+      /* --- Navigation --- */
+      header {
+        background: #fff;
+        padding: 10px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      .logo img {
+        height: 50px;
+      }
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+      nav ul li {
+        margin: 0 15px;
+      }
+      nav ul li a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      .btn-support {
+        background: var(--primary-yellow);
+        padding: 10px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        color: #000;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* --- Hero Section --- */
+      .hero {
+        background:
+          linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url("https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=1920")
+            center/cover;
+        height: 500px;
+        display: flex;
+        align-items: center;
+        padding: 0 10%;
+        color: white;
+      }
+      .flagship-badge {
+        background: var(--primary-yellow);
+        color: #000;
+        padding: 5px 15px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        display: inline-block;
+      }
+      .hero h1 {
+        font-size: 3.5rem;
+        line-height: 1.2;
+        margin-bottom: 20px;
+      }
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 600px;
+      }
+
+      /* --- Content Section (Mission Grid Style) --- */
+      .mission-grid {
+        padding: 80px 10%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        background: var(--light-blue);
+        align-items: stretch;
+      }
+      .card {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+      .card h2 {
+        margin-bottom: 20px;
+        font-size: 2.2rem;
+      }
+
+      .category-mini-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-top: 25px;
+      }
+      .cat-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--light-blue);
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+      .cat-item i {
+        color: var(--primary-yellow);
+      }
+
+      .card-image-only {
+        padding: 0 !important;
+        overflow: hidden;
+        border-radius: 12px;
+        display: flex;
+      }
+      .mission-right-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* --- The Journey --- */
+      .how-it-works {
+        padding: 80px 10% 60px;
+        text-align: center;
+      }
+      .steps {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 40px;
+      }
+      .step {
+        flex: 1;
+        padding: 0 15px;
+      }
+      .step i {
+        width: 70px;
+        height: 70px;
+        background: var(--primary-yellow);
+        border-radius: 50%;
+        line-height: 70px;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        display: inline-block;
+      }
+
+      /* --- Impact Bar (Stats Section) --- */
+      .impact-bar {
+        background: #fff;
+        display: flex;
+        justify-content: space-around;
+        padding: 50px 10%;
+        text-align: center;
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.03);
+        border-top: 1px solid #eee;
+      }
+      .stat-item h3 {
+        color: var(--primary-yellow);
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+      }
+      .stat-item p {
+        color: var(--text-gray);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.8rem;
+      }
+
+      /* --- Awardee Showcase --- */
+      .awardees {
+        padding: 50px 10% 80px;
+        background: #fff;
+        text-align: center;
+      }
+      .awardees h2 {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+      }
+      .awardee-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 50px;
+      }
+      .awardee-card img {
+        width: 100%;
+        border-radius: 15px;
+        margin-bottom: 15px;
+        transition: transform 0.3s ease;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      .awardee-card:hover img {
+        transform: translateY(-10px);
+      }
+      .awardee-card h4 {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+      }
+
+      /* --- Dual CTA --- */
+      .dual-cta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 60px 10%;
+      }
+      .cta-box {
+        padding: 50px;
+        text-align: center;
+        border-radius: 15px;
+        color: white;
+      }
+      .cta-nominate {
+        background: #2c3e50;
+      }
+      .cta-sponsor {
+        background: #27ae60;
+      }
+      .cta-box h3 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+      }
+      .cta-box .btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background: #fff;
+        color: #333;
+        text-decoration: none;
+        border-radius: 25px;
+        margin-top: 25px;
+        font-weight: 700;
+      }
+
+      /* --- Footer --- */
+      footer {
+        background: var(--dark-bg);
+        color: #fff;
+        padding: 60px 10% 20px;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1.5fr;
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+      .footer-col h4 {
+        border-left: 3px solid var(--primary-yellow);
+        padding-left: 10px;
+        margin-bottom: 20px;
+      }
+      .footer-col ul {
+        list-style: none;
+      }
+      .footer-col ul li {
+        margin-bottom: 10px;
+        opacity: 0.8;
+        font-size: 0.9rem;
+      }
+      .copy {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid #333;
+        font-size: 0.8rem;
+        color: #777;
+      }
+
+      @media (max-width: 768px) {
+        .mission-grid,
+        .impact-bar,
+        .steps,
+        .awardee-grid,
+        .dual-cta,
+        .footer-grid {
+          grid-template-columns: 1fr;
+          display: block;
+        }
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+        .step,
+        .stat-item,
+        .awardee-card,
+        .cta-box {
+          margin-bottom: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img
+          src="https://navratanfoundations.com/wp-content/uploads/2021/05/navratan-logo.png"
+          alt="Logo"
+        />
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Projects</a></li>
+          <li>
+            <a href="#" style="color: var(--primary-yellow)">Initiatives</a>
+          </li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="#" class="btn-support"
+        >Support a Cause <i class="fas fa-arrow-right"></i
+      ></a>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <span class="flagship-badge">Flagship Event</span>
+        <h1>Samarpan Awards</h1>
+        <p>
+          A grand culmination of a year-long effort to celebrate the unsung
+          changemakers of our society.
+        </p>
+      </div>
+    </section>
+
+    <section class="mission-grid">
+      <div class="card">
+        <h2>The Celebration</h2>
+        <p style="margin-bottom: 20px; color: var(--text-gray)">
+          Samarpan showcases accomplishments and recognizes individuals who have
+          made significant contributions across diverse sectors.
+        </p>
+
+        <div class="category-mini-grid">
+          <div class="cat-item">
+            <i class="fas fa-check-circle"></i> Education
+          </div>
+          <div class="cat-item"><i class="fas fa-check-circle"></i> Health</div>
+          <div class="cat-item">
+            <i class="fas fa-check-circle"></i> Environment
+          </div>
+          <div class="cat-item">
+            <i class="fas fa-check-circle"></i> Women Empowerment
+          </div>
+          <div class="cat-item">
+            <i class="fas fa-check-circle"></i> Elderly Care
+          </div>
+          <div class="cat-item">
+            <i class="fas fa-check-circle"></i> Child Protection
+          </div>
+        </div>
+      </div>
+      <div class="card card-image-only">
+        <img
+          src="https://images.unsplash.com/photo-1531050171651-a3a7a7a6bb24?auto=format&fit=crop&q=80&w=800"
+          alt="Samarpan Event"
+          class="mission-right-img"
+        />
+      </div>
+    </section>
+
+    <section class="how-it-works">
+      <h2>The Samarpan Journey</h2>
+      <div class="steps">
+        <div class="step">
+          <i class="fas fa-file-signature"></i>
+          <h4>1. Applications</h4>
+          <p>
+            Nominations are invited from dedicated workers in the social sector.
+          </p>
+        </div>
+        <div class="step">
+          <i class="fas fa-user-shield"></i>
+          <h4>2. Panel Review</h4>
+          <p>
+            A panel of distinguished experts selects awardees based on impact.
+          </p>
+        </div>
+        <div class="step">
+          <i class="fas fa-trophy"></i>
+          <h4>3. Grand Event</h4>
+          <p>A grand ceremony celebrating the spirit of selfless service.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="impact-bar">
+      <div class="stat-item">
+        <h3>20+</h3>
+        <p>Annual Awards</p>
+      </div>
+      <div class="stat-item">
+        <h3>500+</h3>
+        <p>Attendees</p>
+      </div>
+      <div class="stat-item">
+        <h3>8+</h3>
+        <p>Sectors Honored</p>
+      </div>
+      <div class="stat-item">
+        <h3>PAN</h3>
+        <p>India Reach</p>
+      </div>
+    </section>
+
+    <section class="awardees">
+      <h2>Our Esteemed Awardees</h2>
+      <p style="color: var(--text-gray)">
+        Honoring the extraordinary impact of ordinary citizens.
+      </p>
+      <div class="awardee-grid">
+        <div class="awardee-card">
+          <img
+            src="https://images.unsplash.com/photo-1577412647305-991150c7d163?auto=format&fit=crop&q=80&w=400"
+            alt="Education Reformers"
+          />
+          <h4>Education Reformers</h4>
+        </div>
+        <div class="awardee-card">
+          <img
+            src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=400"
+            alt="Social Impact Leaders"
+          />
+          <h4>Social Impact Leaders</h4>
+        </div>
+        <div class="awardee-card">
+          <img
+            src="https://images.unsplash.com/photo-1556484645-a030f95be2f9?auto=format&fit=crop&q=80&w=400"
+            alt="Environmental Heroes"
+          />
+          <h4>Environmental Heroes</h4>
+        </div>
+      </div>
+    </section>
+
+    <section class="dual-cta">
+      <div class="cta-box cta-nominate">
+        <h3>Nominate a Hero</h3>
+        <p>
+          Know someone making a difference? Nominate them for the next Samarpan.
+        </p>
+        <a href="#" class="btn">Nominate Now</a>
+      </div>
+      <div class="cta-box cta-sponsor">
+        <h3>Memorial Sponsorship</h3>
+        <p>Sponsor an award in the loving memory of your dear ones.</p>
+        <a href="#" class="btn">Inquire Now</a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <img
+            src="https://navratanfoundations.com/wp-content/uploads/2021/05/navratan-logo.png"
+            style="
+              height: 40px;
+              filter: brightness(0) invert(1);
+              margin-bottom: 20px;
+            "
+          />
+          <p style="opacity: 0.7; font-size: 0.9rem">
+            Navratan Foundations is dedicated to social upliftment through
+            education, art, and recognizing human excellence.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Non Profit</h4>
+          <ul>
+            <li>Patrons</li>
+            <li>Founder's Profile</li>
+            <li>Executive Committee</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li>About Us</li>
+            <li>Projects</li>
+            <li>Privacy Policy</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <ul>
+            <li><i class="fas fa-phone"></i> +91-7011540309</li>
+            <li><i class="fas fa-envelope"></i> navratanjks@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="copy">
+        &copy; 2026 Navratan Foundation. All Rights Reserved.
+      </div>
+    </footer>
+  </body>
+</html>
