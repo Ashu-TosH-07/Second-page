@@ -211,35 +211,63 @@
         font-size: 0.8rem;
       }
 
-      /* --- Awardee Showcase --- */
+      /* --- Awardee Carousel Slider (Updated) --- */
       .awardees {
-        padding: 50px 10% 80px;
+        padding: 80px 0;
         background: #fff;
         text-align: center;
+        overflow: hidden;
       }
       .awardees h2 {
         font-size: 2.2rem;
         margin-bottom: 10px;
       }
-      .awardee-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
+
+      .slider-container {
         margin-top: 50px;
+        width: 100%;
       }
+
+      .slider-track {
+        display: flex;
+        width: calc(
+          300px * 6
+        ); /* Width of item * number of original items * 2 */
+        animation: scrollLeft 20s linear infinite;
+        gap: 25px;
+      }
+
+      .slider-track:hover {
+        animation-play-state: paused;
+      }
+
+      .awardee-card {
+        width: 280px; /* Slightly smaller width */
+        flex-shrink: 0;
+        text-align: center;
+      }
+
       .awardee-card img {
         width: 100%;
+        height: 200px; /* Choti height as requested */
+        object-fit: cover;
         border-radius: 15px;
         margin-bottom: 15px;
-        transition: transform 0.3s ease;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
       }
-      .awardee-card:hover img {
-        transform: translateY(-10px);
-      }
+
       .awardee-card h4 {
         font-size: 1.1rem;
         color: var(--text-dark);
+      }
+
+      @keyframes scrollLeft {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(calc(-305px * 3));
+        } /* (width + gap) * original items */
       }
 
       /* --- Dual CTA --- */
@@ -313,7 +341,6 @@
         .mission-grid,
         .impact-bar,
         .steps,
-        .awardee-grid,
         .dual-cta,
         .footer-grid {
           grid-template-columns: 1fr;
@@ -324,18 +351,16 @@
         }
         .step,
         .stat-item,
-        .awardee-card,
         .cta-box {
           margin-bottom: 40px;
         }
       }
 
-      /* Constant Glow Effect */
+      /* Stats Counter Styling */
       .counter {
         transition: text-shadow 0.3s ease-in-out;
       }
 
-      /* Infinite Slow Flicker & Glow Animation */
       .flicker-infinite {
         animation: slow-glow-flicker 3s infinite ease-in-out;
       }
@@ -353,21 +378,7 @@
             0 0 20px rgba(241, 196, 15, 0.8),
             0 0 30px rgba(241, 196, 15, 0.4);
           transform: scale(1.02);
-          color: #000; /* Optional: halka sa color shift glowing feel ke liye */
-        }
-      }
-
-      @keyframes flicker-animation {
-        0%,
-        100% {
-          opacity: 1;
-          color: var(--primary-yellow);
-          transform: scale(1);
-        }
-        50% {
-          opacity: 0.5;
-          color: #fff;
-          transform: scale(1.1);
+          color:#000;
         }
       }
     </style>
@@ -489,30 +500,54 @@
 
     <section class="awardees">
       <h2>Our Esteemed Awardees</h2>
-      <p style="color: var(--text-gray)">
+      <p style="color: var(--text-gray); padding: 0 10%">
         Honoring the extraordinary impact of ordinary citizens.
       </p>
-      <div class="awardee-grid">
-        <div class="awardee-card">
-          <img
-            src="https://navratanfoundations.com/assets/img/events/event-5.jpg"
-            alt="Education Reformers"
-          />
-          <h4>Education Reformers</h4>
-        </div>
-        <div class="awardee-card">
-          <img
-            src="https://navratanfoundations.com/assets/img/events/event-5.jpg"
-            alt="Social Impact Leaders"
-          />
-          <h4>Social Impact Leaders</h4>
-        </div>
-        <div class="awardee-card">
-          <img
-            src="https://navratanfoundations.com/assets/img/events/event-5.jpg"
-            alt="Environmental Heroes"
-          />
-          <h4>Environmental Heroes</h4>
+
+      <div class="slider-container">
+        <div class="slider-track">
+          <div class="awardee-card">
+            <img
+              src="https://navratanfoundations.com/assets/img/events/event-5.jpg"
+              alt="Education Reformers"
+            />
+            <h4>Education Reformers</h4>
+          </div>
+          <div class="awardee-card">
+            <img
+              src="https://navratanfoundations.com/assets/img/events/event-5.jpg"
+              alt="Social Impact Leaders"
+            />
+            <h4>Social Impact Leaders</h4>
+          </div>
+          <div class="awardee-card">
+            <img
+              src="https://navratanfoundations.com/assets/img/events/event-5.jpg"
+              alt="Environmental Heroes"
+            />
+            <h4>Environmental Heroes</h4>
+          </div>
+          <div class="awardee-card">
+            <img
+              src="https://navratanfoundations.com/assets/img/events/event-5.jpg"
+              alt="Education Reformers"
+            />
+            <h4>Education Reformers</h4>
+          </div>
+          <div class="awardee-card">
+            <img
+              src="https://navratanfoundations.com/assets/img/events/event-5.jpg"
+              alt="Social Impact Leaders"
+            />
+            <h4>Social Impact Leaders</h4>
+          </div>
+          <div class="awardee-card">
+            <img
+              src="https://navratanfoundations.com/assets/img/events/event-5.jpg"
+              alt="Environmental Heroes"
+            />
+            <h4>Environmental Heroes</h4>
+          </div>
         </div>
       </div>
     </section>
@@ -583,28 +618,23 @@
       const startCounters = () => {
         counters.forEach((counter) => {
           const target = +counter.getAttribute("data-target");
-          const duration = 3000; // 3 seconds counting slow chalegi
+          const duration = 3000;
           let startTime = null;
 
           const step = (currentTime) => {
             if (!startTime) startTime = currentTime;
             const progress = Math.min((currentTime - startTime) / duration, 1);
-
-            // Easing function for smoother finish
             const easeOutQuad = (t) => t * (2 - t);
             const currentCount = Math.floor(easeOutQuad(progress) * target);
-
             counter.innerText = currentCount;
 
             if (progress < 1) {
               window.requestAnimationFrame(step);
             } else {
               counter.innerText = target;
-              // Animation khatam hone par infinite glow class add hogi
               counter.classList.add("flicker-infinite");
             }
           };
-
           window.requestAnimationFrame(step);
         });
       };
