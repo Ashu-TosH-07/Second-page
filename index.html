@@ -196,6 +196,7 @@
         text-align: center;
         box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.03);
         border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
       }
       .stat-item h3 {
         color: var(--primary-yellow);
@@ -328,6 +329,47 @@
           margin-bottom: 40px;
         }
       }
+
+      /* Constant Glow Effect */
+      .counter {
+        transition: text-shadow 0.3s ease-in-out;
+      }
+
+      /* Infinite Slow Flicker & Glow Animation */
+      .flicker-infinite {
+        animation: slow-glow-flicker 3s infinite ease-in-out;
+      }
+
+      @keyframes slow-glow-flicker {
+        0%,
+        100% {
+          opacity: 1;
+          text-shadow: 0 0 5px rgba(241, 196, 15, 0.2);
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.7;
+          text-shadow:
+            0 0 20px rgba(241, 196, 15, 0.8),
+            0 0 30px rgba(241, 196, 15, 0.4);
+          transform: scale(1.02);
+          color: #000; /* Optional: halka sa color shift glowing feel ke liye */
+        }
+      }
+
+      @keyframes flicker-animation {
+        0%,
+        100% {
+          opacity: 1;
+          color: var(--primary-yellow);
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          color: #fff;
+          transform: scale(1.1);
+        }
+      }
     </style>
   </head>
   <body>
@@ -428,20 +470,20 @@
 
     <section class="impact-bar">
       <div class="stat-item">
-        <h3>20+</h3>
+        <h3><span class="counter" data-target="20">0</span>+</h3>
         <p>Annual Awards</p>
       </div>
       <div class="stat-item">
-        <h3>500+</h3>
+        <h3><span class="counter" data-target="500">0</span>+</h3>
         <p>Attendees</p>
       </div>
       <div class="stat-item">
-        <h3>8+</h3>
+        <h3><span class="counter" data-target="8">0</span>+</h3>
         <p>Sectors Honored</p>
       </div>
       <div class="stat-item">
-        <h3>PAN</h3>
-        <p>India Reach</p>
+        <h3><span class="counter" data-target="5">0</span>+</h3>
+        <p>States Covered</p>
       </div>
     </section>
 
@@ -534,5 +576,52 @@
         &copy; 2026 Navratan Foundation. All Rights Reserved.
       </div>
     </footer>
+
+    <script>
+      const counters = document.querySelectorAll(".counter");
+
+      const startCounters = () => {
+        counters.forEach((counter) => {
+          const target = +counter.getAttribute("data-target");
+          const duration = 3000; // 3 seconds counting slow chalegi
+          let startTime = null;
+
+          const step = (currentTime) => {
+            if (!startTime) startTime = currentTime;
+            const progress = Math.min((currentTime - startTime) / duration, 1);
+
+            // Easing function for smoother finish
+            const easeOutQuad = (t) => t * (2 - t);
+            const currentCount = Math.floor(easeOutQuad(progress) * target);
+
+            counter.innerText = currentCount;
+
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            } else {
+              counter.innerText = target;
+              // Animation khatam hone par infinite glow class add hogi
+              counter.classList.add("flicker-infinite");
+            }
+          };
+
+          window.requestAnimationFrame(step);
+        });
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              startCounters();
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+
+      observer.observe(document.querySelector(".impact-bar"));
+    </script>
   </body>
 </html>
